@@ -9,8 +9,21 @@ steps:
     args: ['test', 'server']
     env: ['GOPATH=./go-server']
 
-  - id: "Publicacao da imagem no registry pessoal"
+  - id: "Build do container"
     name: 'gcr.io/cloud-builders/docker'
     args: ['build', '--tag=docker.io/aleckzts/go-server', './go-server']
 
-images: ['docker.io/aleckzts/go-server']
+  - id: "Login no Docker Hun"
+    name: 'gcr.io/cloud-builders/docker'
+    entrypoint: 'bash'
+    args: ['-c', 'docker login --username=aleckzts --password=$$PASSWORD']
+    secretEnv: ['PASSWORD']
+
+  - id: "Push da imagem para o Docker Hub"
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'aleckzts/go-server']
+
+secrets:
+  - kmsKeyName: projects/653130070573/locations/global/keyRings/aleckzts-ring/cryptoKeys/key-dockerhub
+    secretEnv:
+      PASSWORD: 'CiQAeVHZig+g8rIT0F10fM+Ti/25nZ1cZsKNj5nBlpcJodey7RMSNAB/0QVbRlDXVdT6s0169eS3ep6wuedGSewAcXpX8aFSd4uR/v04FPKboMWFpDYg/jwYFQw='
