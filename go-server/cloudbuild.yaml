@@ -24,6 +24,6 @@ steps:
     args: ['push', 'aleckzts/go-server']
 
 secrets:
-  - kmsKeyName: projects/653130070573/locations/global/keyRings/aleckzts-ring/cryptoKeys/key-dockerhub
+  - kmsKeyName: projects/codeeducation-279109/locations/global/keyRings/aleckzts-ring/cryptoKeys/key-dockerhub
     secretEnv:
       PASSWORD: 'CiQAeVHZig+g8rIT0F10fM+Ti/25nZ1cZsKNj5nBlpcJodey7RMSNAB/0QVbRlDXVdT6s0169eS3ep6wuedGSewAcXpX8aFSd4uR/v04FPKboMWFpDYg/jwYFQw='
