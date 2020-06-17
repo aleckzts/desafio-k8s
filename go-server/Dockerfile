@@ -3,7 +3,7 @@ FROM golang:1.13.11-alpine AS builder
 
 WORKDIR /go
 
-COPY server /go/src/server
+COPY src/server /go/src/server
 
 RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go install -ldflags="-w -s" server
 RUN CGO_ENABLED=0 go test server
