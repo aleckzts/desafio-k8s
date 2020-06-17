@@ -1,0 +1,16 @@
+steps:
+  - id: "Build do source em Go"
+    name: 'gcr.io/cloud-builders/go:alpine'
+    args: ['install', 'server']
+    env: ['GOPATH=./go-server']
+
+  - id: "Teste do compilado"
+    name: 'gcr.io/cloud-builders/go:alpine'
+    args: ['test', 'server']
+    env: ['GOPATH=./go-server']
+
+  - id: "Publicacao da imagem no registry pessoal"
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '--tag=docker.io/aleckzts/go-server', './go-server']
+
+images: ['docker.io/aleckzts/go-server']
